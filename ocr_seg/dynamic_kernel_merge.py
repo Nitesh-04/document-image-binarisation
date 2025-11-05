@@ -176,7 +176,6 @@ def main():
             cv2.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 2)
             boxes.append([x, y, w, h])
 
-    print("Initial box count before merging:", len(boxes))
     cv2.imshow("Word Boxes (Connected Components)", output); cv2.waitKey(0)
 
     output = cv2.cvtColor(refined, cv2.COLOR_GRAY2BGR)
@@ -211,7 +210,6 @@ def main():
         if not placed:
             lines.append([box])
     
-    print(f"\nGrouped into {len(lines)} lines:")
 
     
     final_boxes = []
@@ -255,7 +253,6 @@ def main():
                 current = next_box
         final_boxes.append(current)
 
-    print("Final merged box count:", len(final_boxes))
 
     
     if len(final_boxes) > 0:
@@ -269,14 +266,8 @@ def main():
         filtered_boxes = [b for b in final_boxes if (b[2] * b[3]) >= min_final_area]
         
         removed_count = len(final_boxes) - len(filtered_boxes)
-        if removed_count > 0:
-            print(f"\nFiltered out {removed_count} very small boxes:")
-            print(f"  Average final box area: {avg_area:.0f}px²")
-            print(f"  Median final box area: {median_area_final:.0f}px²")
-            print(f"  Min area threshold (5% of avg): {min_final_area:.0f}px²")
         
         final_boxes = filtered_boxes
-        print(f"Final box count after small box filtering: {len(final_boxes)}")
 
     
     for (x, y, w, h) in final_boxes:
