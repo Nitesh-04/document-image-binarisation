@@ -94,7 +94,7 @@ def dynamic_closing_by_bands(gray_img, band_kernel_sizes, overlap=0.30):
 
 
 def main():
-    image_path = "ocr_seg/images/47507.jpg"
+    image_path = "dataset/Train_Data/6306.jpg"
     img = cv2.imread(image_path)
     if img is None:
         raise SystemExit(f"Failed to read '{image_path}' — check file path.")
@@ -162,9 +162,9 @@ def main():
 
     output = cv2.cvtColor(refined, cv2.COLOR_GRAY2BGR)
 
-    horizontal_gap_threshold = 35
-    vertical_overlap_ratio_min = 0.10
-    line_grouping_tolerance = 0.5
+    horizontal_gap_threshold = 20
+    vertical_overlap_ratio_min = 0
+    line_grouping_tolerance = 1.0
     
 
     lines = []
